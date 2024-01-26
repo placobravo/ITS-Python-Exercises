@@ -68,6 +68,11 @@ for i in my_list:
 # Each item will become a tuple of numbers in the new my_list_number_tuples
 # For example the string "5342.53;8;9.1;-10.5" will become a tuple of numbers, and be an item in my_list_number_tuples as (5342.53, 8, 9.1, -10.5)
 my_list_number_tuples = ()
+for i in my_list:
+    for char in i:
+        if not str.isdecimal(char) and char != ";" and char != "." and char != "-":
+            break
+
 
 while True:
     while True:
