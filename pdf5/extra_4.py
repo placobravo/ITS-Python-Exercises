@@ -5,9 +5,13 @@ lista1 = [random.randint(1, 100) for x in range(100)]
 lista2 = [random.randint(1, 100) for x in range(100)]
 
 
-def isIn(x, lista):
-    if x in lista:
-        return True
+def isIn(lista=lista1):
+    def isInLista(x):
+        return x in lista
+
+    return isInLista
 
 
-print(list(filter(isIn(lista=lista2), lista1)))
+inLista1 = isIn(lista1)
+
+print(list(filter(inLista1, lista2)))
