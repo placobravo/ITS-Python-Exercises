@@ -1,14 +1,9 @@
 # Trovare gli indici di tutte le occorrenze della variabile val1 nella lista mylist, entrambe inserite in input da tastiera. Il risultato, sotto forma di lista, va visualizzato a schermo
+import random
 
-lista = []
+lista = [random.randint(1, 100) for x in range(1000)]
 
-while True:
-    try:
-        lista.append(input("Inserisci un valore: "))
-    except KeyboardInterrupt:
-        break
-
-val1 = input("\nInserisci una stringa di testo da cercare nella lista: ")
+val1 = int(input("\nInserisci un numero da cercare nella lista: "))
 
 if val1 in lista:
     print(val1, "è nella lista")

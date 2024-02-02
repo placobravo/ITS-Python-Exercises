@@ -59,7 +59,7 @@ citta = [
     "terni",
     "teramo",
 ]
-età = [random.randint(18, 70) for x in range(50)]
+eta = [random.randint(18, 70) for x in range(50)]
 paese_di_origine = [
     "marte",
     "giove",
@@ -78,4 +78,14 @@ def createPerson():
         random.choice(cognome),
         random.choice(indirizzo),
         random.choice(citta),
+        random.choice(eta),
+        random.choice(paese_di_origine),
     )
+
+
+persone = []
+
+for i in range(11):
+    persone.append(createPerson())
+
+print(persone)
