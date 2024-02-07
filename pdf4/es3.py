@@ -1,15 +1,14 @@
-# is prime
+from math import sqrt
 
 
-def isPrime(number):
-    for x in range(2, number):
-        if number % x == 0:
+def isPrime(x):
+    for i in range(2, int(sqrt(x)) + 1):
+        if x % i == 0:
             return False
-
     return True
 
 
-prova = int(input("Inserisci un numero: "))
-
-if isPrime(prova):
-    print("wow")
+if isPrime(int(input("Inserisci un numero: "))):
+    print("Il numero inserito è primo.")
+else:
+    print("Il numero inserito non è primo.")

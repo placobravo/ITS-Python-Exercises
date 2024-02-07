@@ -1,10 +1,10 @@
-# lista coi primi 10 quadrati
-#
-# fun1 = prendi lista come input e da in output una tupla
-#   solo numeri pari con funzione filter
-# fun2 = prendi lista come input e da in output una tupla
-#   radice quadratra usantdo funzione map
-#
+# Utilizzare la list comprehension per creare la lista dei primi dieci quadrati:
+# a = [0, 1, 4, 9…]; si creino, successivamente, due nuove funzioni che accettino in
+# input la lista precedente e restituiscano in output due tuple, secondo le seguenti
+# specifiche:
+# - solo numeri pari, utilizzando internamente la funzione filter
+# - la radice quadrata, utilizzando internamente la funzione map lista coi primi 10 quadrati
+
 from math import sqrt
 
 
