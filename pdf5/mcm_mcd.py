@@ -64,8 +64,8 @@ def mcm(int_list):
 
 def MCD(int_list):
     primes_dictionaries_list = []
-    dmcd = {}
     mcd = 1
+    dmcd = {}
 
     if len(int_list) == 1:
         return int_list[0]
@@ -81,15 +81,15 @@ def MCD(int_list):
     for key in primes_dictionaries_list[0]:
         for prime_dictionary in primes_dictionaries_list:
             if key in prime_dictionary:
-                if prime_dictionary[key] < primes_dictionaries_list[0]:
-                    primes_dictionaries_list[0] = prime_dictionary[key]
                 continue
             else:
                 break
-        # If the key is not in all the dictionaries the for
-        # cicle gets broken and this else doesn't get executed
         else:
-            pass
+            if key in dmcd:
+                if dmcd[key] < primes_dictionaries_list[0][key]:
+                    dmcd[key] = primes_dictionaries_list[0][key]
+            else:
+                dmcd[key] = primes_dictionaries_list[0][key]
 
     # Now simply multiply each dict key to the power
     # of its corresponding value
@@ -111,4 +111,4 @@ except KeyboardInterrupt:
 
 print("\n" * 5)
 
-print(mcm(int_list))
+print(MCD(int_list))
