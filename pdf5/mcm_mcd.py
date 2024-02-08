@@ -6,7 +6,7 @@
 from math import sqrt
 
 
-def fattoriPrimi(int_number):
+def primeFactors(int_number):
     prime_factors = {}
 
     while int_number > 1:
@@ -42,7 +42,7 @@ def mcm(int_list):
 
     # Create a list of dictionaries with primes factors
     for x in int_list:
-        primes_dictionaries_list.append(fattoriPrimi(x))
+        primes_dictionaries_list.append(primeFactors(x))
 
     # Scan each dictionary in list and find each unique
     # largest prime factor amongst all the dictionaries
@@ -62,16 +62,53 @@ def mcm(int_list):
     return mcm
 
 
+def MCD(int_list):
+    primes_dictionaries_list = []
+    dmcd = {}
+    mcd = 1
+
+    if len(int_list) == 1:
+        return int_list[0]
+    elif len(int_list) == 0:
+        return 0
+
+    # Create a list of dictionaries with primes factors
+    for x in int_list:
+        primes_dictionaries_list.append(primeFactors(x))
+
+    # Scan each dictionary in list and find each unique
+    # largest prime factor amongst all the dictionaries
+    for key in primes_dictionaries_list[0]:
+        for prime_dictionary in primes_dictionaries_list:
+            if key in prime_dictionary:
+                if prime_dictionary[key] < primes_dictionaries_list[0]:
+                    primes_dictionaries_list[0] = prime_dictionary[key]
+                continue
+            else:
+                break
+        # If the key is not in all the dictionaries the for
+        # cicle gets broken and this else doesn't get executed
+        else:
+            pass
+
+    # Now simply multiply each dict key to the power
+    # of its corresponding value
+    for key in dmcd:
+        mcd = mcd * (key ** dmcd[key])
+
+    return mcd
+
+
 ############################################################
 
-lista_interi = []
+int_list = []
 
 try:
     while True:
-        lista_interi.append(int(input("Inserisci un intero: ")))
+        int_list.append(int(input("Inserisci un intero: ")))
 except KeyboardInterrupt:
     pass
 
 print("\n" * 5)
 
-print(mcm(lista_interi))
+print(mcm(int_list))
