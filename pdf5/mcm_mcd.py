@@ -25,6 +25,25 @@ def primeFactors(int_number):
     return prime_factors
 
 
+def divisors(prime_dictionary):
+    power_primes_list = []
+    divisors_list = []
+
+    for key in prime_dictionary:
+        temp_list = [key**item for item in range(1, prime_dictionary[key] + 1)]
+        temp_list.append(1)
+        power_primes_list.append(list(temp_list))
+        temp_list.clear()
+    print(power_primes_list)
+
+    for item in power_primes_list:
+        for number in item:
+            temp_list = [x * number for x in item]
+            divisors_list.extend(temp_list)
+
+    print(divisors_list)
+
+
 def mcm(primes_dictionaries_list):
     dmcm = {}
     mcm = 1
@@ -55,7 +74,7 @@ def MCD(primes_dictionaries_list):
     # if a key is in all the other dictionaries
     for key in primes_dictionaries_list[0]:
         for prime_dictionary in primes_dictionaries_list:
-            # If key in any dictionary we compare its value
+            # If key is in any dictionary we compare its value
             # and only add it if it's lower
             if key in prime_dictionary:
                 if key in dmcd:
@@ -64,7 +83,7 @@ def MCD(primes_dictionaries_list):
                 else:
                     dmcd[key] = prime_dictionary[key]
 
-            # If key not in any prime_dictionary we break
+            # If key is not in any prime_dictionary we break
             # the cycle and remove the key from dmcd
             else:
                 dmcd.pop(key)
@@ -98,10 +117,13 @@ for x in int_list:
 
 
 # If list is empty or one element return 0 or the element itself
-if len(int_list) == 1:
-    print(int_list[0])
-elif len(int_list) == 0:
-    print(0)
-else:
-    print("Il massimo comune divisore è: ", MCD(primes_dictionaries_list))
-    print("Il minimo comune multiplo è: ", mcm(primes_dictionaries_list))
+# if len(int_list) == 1:
+#     print(int_list[0])
+# elif len(int_list) == 0:
+#     print(0)
+# else:
+#     print("Il massimo comune divisore è: ", MCD(primes_dictionaries_list))
+#     print("Il minimo comune multiplo è: ", mcm(primes_dictionaries_list))
+
+print("dizionario coi fattori primi:", primeFactors(2502))
+print(divisors(primeFactors(2502)))
