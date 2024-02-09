@@ -1,8 +1,3 @@
-# Realizzazione di una funzione che ricevuto in ingresso una tupla di numeri interi ne
-# calcoli lo MCD (Massimo Comune Denominatore) e lo restituisca
-#
-# Realizzazione di una funzione che ricevuto in ingresso una tupla di numeri interi ne
-# calcoli lo mcm (minimo comune multplo) e lo restituisca
 from math import sqrt
 
 
@@ -30,19 +25,9 @@ def primeFactors(int_number):
     return prime_factors
 
 
-def mcm(int_list):
-    primes_dictionaries_list = []
+def mcm(primes_dictionaries_list):
     dmcm = {}
     mcm = 1
-
-    if len(int_list) == 1:
-        return int_list[0]
-    elif len(int_list) == 0:
-        return 0
-
-    # Create a list of dictionaries with primes factors
-    for x in int_list:
-        primes_dictionaries_list.append(primeFactors(x))
 
     # Scan each dictionary in list and find each unique
     # largest prime factor amongst all the dictionaries
@@ -62,34 +47,28 @@ def mcm(int_list):
     return mcm
 
 
-def MCD(int_list):
-    primes_dictionaries_list = []
-    mcd = 1
+def MCD(primes_dictionaries_list):
     dmcd = {}
+    mcd = 1
 
-    if len(int_list) == 1:
-        return int_list[0]
-    elif len(int_list) == 0:
-        return 0
-
-    # Create a list of dictionaries with primes factors
-    for x in int_list:
-        primes_dictionaries_list.append(primeFactors(x))
-
-    # Scan each dictionary in list and find each unique
-    # largest prime factor amongst all the dictionaries
+    # Scan all the keys in the first dictionary, and see
+    # if a key is in all the other dictionaries
     for key in primes_dictionaries_list[0]:
         for prime_dictionary in primes_dictionaries_list:
+            # If key in any dictionary we compare its value
+            # and only add it if it's lower
             if key in prime_dictionary:
-                continue
+                if key in dmcd:
+                    if dmcd[key] > prime_dictionary[key]:
+                        dmcd[key] = prime_dictionary[key]
+                else:
+                    dmcd[key] = prime_dictionary[key]
+
+            # If key not in any prime_dictionary we break
+            # the cycle and remove the key from dmcd
             else:
+                dmcd.pop(key)
                 break
-        else:
-            if key in dmcd:
-                if dmcd[key] < primes_dictionaries_list[0][key]:
-                    dmcd[key] = primes_dictionaries_list[0][key]
-            else:
-                dmcd[key] = primes_dictionaries_list[0][key]
 
     # Now simply multiply each dict key to the power
     # of its corresponding value
@@ -102,6 +81,7 @@ def MCD(int_list):
 ############################################################
 
 int_list = []
+primes_dictionaries_list = []
 
 try:
     while True:
@@ -111,4 +91,17 @@ except KeyboardInterrupt:
 
 print("\n" * 5)
 
-print(MCD(int_list))
+
+# Create a list of dictionaries with primes factors
+for x in int_list:
+    primes_dictionaries_list.append(primeFactors(x))
+
+
+# If list is empty or one element return 0 or the element itself
+if len(int_list) == 1:
+    print(int_list[0])
+elif len(int_list) == 0:
+    print(0)
+else:
+    print("Il massimo comune divisore è: ", MCD(primes_dictionaries_list))
+    print("Il minimo comune multiplo è: ", mcm(primes_dictionaries_list))
