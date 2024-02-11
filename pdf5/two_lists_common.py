@@ -6,7 +6,7 @@ lista1 = [random.randint(1, 100) for x in range(100)]
 lista2 = [random.randint(1, 100) for x in range(100)]
 
 
-def isIn(lista=lista1):
+def isIn(lista):
     def isInLista(x):
         return x in lista
 

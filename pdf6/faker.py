@@ -8,6 +8,7 @@
 #
 # calcolare l'età media
 import random
+import csv
 
 nome = [
     "mario",
@@ -84,8 +85,40 @@ def createPerson():
 
 
 persone = []
+eta_totale = 0
+num_persone = 0
 
 for i in range(11):
     persone.append(createPerson())
 
-print(persone)
+try:
+    with open("faker.csv", "x") as csvfile:
+        fakerwriter = csv.writer(csvfile, delimiter=",")
+        fakerwriter.writerows(persone)
+except FileExistsError:
+    pass
+
+
+with open("faker.csv", "r+") as csvfile:
+    fakerreader = csv.reader(csvfile, delimiter=",")
+
+    for item in fakerreader:
+        print(
+            "\nNome:\t\t\t",
+            item[0],
+            "\nCognome:\t\t",
+            item[1],
+            "\nIndirizzo:\t\t",
+            item[2],
+            "\nCittà:\t\t\t",
+            item[3],
+            "\nEtà:\t\t\t",
+            item[4],
+            "\nPaese di origine:\t",
+            item[5],
+        )
+        eta_totale += int(item[4])
+        num_persone += 1
+    print("\n" * 5)
+
+    print("L'età media è: %.2f anni. " % (eta_totale / num_persone))

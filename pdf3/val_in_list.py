@@ -1,4 +1,6 @@
-# Trovare gli indici di tutte le occorrenze della variabile val1 nella lista mylist, entrambe inserite in input da tastiera. Il risultato, sotto forma di lista, va visualizzato a schermo
+# Trovare gli indici di tutte le occorrenze della variabile val1 nella lista mylist, entrambe inserite in input da
+# tastiera. Il risultato, sotto forma di lista, va visualizzato sullo schermo.
+# Ad esempio, se val1 = 1 e mylist = [1, 3, 6, 9, 1, 1, 2, 1, 2] il risultato deve essere [0, 4, 5, 7].
 
 lista = []
 

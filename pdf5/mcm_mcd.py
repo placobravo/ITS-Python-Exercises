@@ -1,129 +1,41 @@
-from math import sqrt
+# Realizzazione di una funzione che ricevuto in ingresso una tupla di numeri interi ne
+# calcoli lo MCD e lo restituisca
+#
+# Realizzazione di una funzione che ricevuto in ingresso una tupla di numeri interi ne
+# calcoli lo mcm e lo restituisca
+#
+# Realizzazione di una funzione che ricevuto in ingresso un numero intero restituisca
+# una tupla contenente i suoi divisori
+from functools import reduce
+from random import randint
 
 
-def primeFactors(int_number):
-    prime_factors = {}
-
-    while int_number > 1:
-        # The +2 is needed so that we don't end with an infinite loop:
-        # sqrt(2) = 1 thus we would get no iteration because range(2,1) is []
-        for x in range(2, int(sqrt(int_number) + 2)):
-            if int_number % x == 0:
-                if x in prime_factors:
-                    prime_factors[x] += 1
-                else:
-                    prime_factors[x] = 1
-                int_number = int_number // x
-                break
-        else:
-            if int_number in prime_factors:
-                prime_factors[int_number] += 1
-            else:
-                prime_factors[int_number] = 1
-            int_number = 0
-
-    return prime_factors
+# Massimo Comune Divisore di due numeri con teorema di euclicde
+def mcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
 
 
-def divisors(prime_dictionary):
-    power_primes_list = []
-    divisors_list = []
-
-    for key in prime_dictionary:
-        temp_list = [key**item for item in range(1, prime_dictionary[key] + 1)]
-        temp_list.append(1)
-        power_primes_list.append(list(temp_list))
-        temp_list.clear()
-    print(power_primes_list)
-
-    for item in power_primes_list:
-        for number in item:
-            temp_list = [x * number for x in item]
-            divisors_list.extend(temp_list)
-
-    print(divisors_list)
+# Minimo comune multiplo di due numeri (a partire dal massimo comune divisore)
+def mcm(a, b):
+    return a * b // mcd(a, b)
 
 
-def mcm(primes_dictionaries_list):
-    dmcm = {}
-    mcm = 1
+# Per calcolare l'mcd o l'mcm di più numeri basta iterare il calcolo tra
+# la lista di numeri
+def mcm_mcd(func):
+    def iteration(int_list):
+        return reduce(func, int_list)
 
-    # Scan each dictionary in list and find each unique
-    # largest prime factor amongst all the dictionaries
-    for primes_dict in primes_dictionaries_list:
-        for key in primes_dict:
-            if key in dmcm:
-                if dmcm[key] < primes_dict[key]:
-                    dmcm[key] = primes_dict[key]
-            else:
-                dmcm[key] = primes_dict[key]
-
-    # Now simply multiply each dict key to the power
-    # of its corresponding value
-    for key in dmcm:
-        mcm = mcm * (key ** dmcm[key])
-
-    return mcm
+    return iteration
 
 
-def MCD(primes_dictionaries_list):
-    dmcd = {}
-    mcd = 1
+mcd_calcolatore = mcm_mcd(mcd)
+mcm_calcolatore = mcm_mcd(mcm)
 
-    # Scan all the keys in the first dictionary, and see
-    # if a key is in all the other dictionaries
-    for key in primes_dictionaries_list[0]:
-        for prime_dictionary in primes_dictionaries_list:
-            # If key is in any dictionary we compare its value
-            # and only add it if it's lower
-            if key in prime_dictionary:
-                if key in dmcd:
-                    if dmcd[key] > prime_dictionary[key]:
-                        dmcd[key] = prime_dictionary[key]
-                else:
-                    dmcd[key] = prime_dictionary[key]
+randomlist = [randint(1, 1000) for x in range(10)]
 
-            # If key is not in any prime_dictionary we break
-            # the cycle and remove the key from dmcd
-            else:
-                dmcd.pop(key)
-                break
-
-    # Now simply multiply each dict key to the power
-    # of its corresponding value
-    for key in dmcd:
-        mcd = mcd * (key ** dmcd[key])
-
-    return mcd
-
-
-############################################################
-
-int_list = []
-primes_dictionaries_list = []
-
-try:
-    while True:
-        int_list.append(int(input("Inserisci un intero: ")))
-except KeyboardInterrupt:
-    pass
-
-print("\n" * 5)
-
-
-# Create a list of dictionaries with primes factors
-for x in int_list:
-    primes_dictionaries_list.append(primeFactors(x))
-
-
-# If list is empty or one element return 0 or the element itself
-# if len(int_list) == 1:
-#     print(int_list[0])
-# elif len(int_list) == 0:
-#     print(0)
-# else:
-#     print("Il massimo comune divisore è: ", MCD(primes_dictionaries_list))
-#     print("Il minimo comune multiplo è: ", mcm(primes_dictionaries_list))
-
-print("dizionario coi fattori primi:", primeFactors(2502))
-print(divisors(primeFactors(2502)))
+print(randomlist)
+print(f"Il massimo comune divisore è: {mcd_calcolatore(randomlist)}")
+print(f"Il minimo comune multiplo è: {mcm_calcolatore(randomlist)}")

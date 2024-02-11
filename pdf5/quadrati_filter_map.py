@@ -9,9 +9,7 @@ from math import sqrt
 
 
 def isEven(x):
-    if x % 2 == 0:
-        return True
-    return False
+    return x % 2 == 0
 
 
 def onlyEven(lista):

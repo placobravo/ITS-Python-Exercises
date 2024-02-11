@@ -1,4 +1,5 @@
 # Data una lista generata attraverso la funzione randint, se ne stampi la media aritmetica, la moda e la mediana.
+
 from random import randint
 
 lista = [randint(1, 1000) for x in range(100)]

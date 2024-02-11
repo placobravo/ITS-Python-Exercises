@@ -15,4 +15,6 @@ sentence = "Nel mezzo del cammin di nostra vita mi ritrovai in una selva oscura 
 
 print(list(map(tripleTuple, sentence.split())))
 
+
+# Using a lambda function
 print(list(map(lambda x: (str.lower(x), str.upper(x), len(x)), sentence.split())))

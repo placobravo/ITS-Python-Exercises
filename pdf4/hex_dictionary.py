@@ -1,3 +1,10 @@
+# Scrivere un programma che legga il file dell’esercizio
+# precedente e generi un dizionario le cui chiavi siano costituite dai
+# numeri esadecimali letti e i valori associati alla chiave siano dati
+# dalle occorrenze dei numeri stessi.
+# Es: se nel file il numero F5 appare 13 volte il dizionario
+# sarà così composto D = {…, “F5”: 13, ...}
+
 try:
     with open("hex_casuali.txt", "r") as hex_file:
         hex_list = [x.rstrip() for x in hex_file.readlines()]

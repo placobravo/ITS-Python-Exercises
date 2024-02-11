@@ -1,3 +1,5 @@
+# Test di primalità su di un numero dato in input.
+
 from math import sqrt
 
 

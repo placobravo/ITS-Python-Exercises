@@ -1,3 +1,8 @@
+# Archivio motorizzazione: il programma memorizza i dati delle vetture della
+# città. Per ogni vettura sono memorizzati colore/i, modello e cilindrata.
+# Calcolare il numero di auto che pagano il superbollo (cilindrata > 3000 cm^3).
+# Utilizzare dizionari innestati
+
 automobili = {
     "veicolo1": {"colore": "blu", "modello": "alfa", "cilindrata": 3500},
     "veicolo2": {"colore": "rosso", "modello": "panda", "cilindrata": 2000},
